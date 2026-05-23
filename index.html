@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pranith Varma S — Mobile Developer @ Freo. Building reliable, high-scale fintech apps in Flutter." />
+  <title>Pranith Varma S — Mobile Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0D0D0F;
+      --bg2:      #141416;
+      --bg3:      #1C1C20;
+      --border:   #2A2A30;
+      --text:     #E8E8EC;
+      --muted:    #7A7A85;
+      --accent:   #E8A87C;
+      --accent2:  #7EC8A4;
+      --negative: #E07B7B;
+      --ff-head:  'DM Serif Display', serif;
+      --ff-body:  'DM Sans', sans-serif;
+      --ff-mono:  'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ff-body);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 60px;
+      background: rgba(13,13,15,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--ff-head);
+      font-size: 18px;
+      color: var(--text);
+    }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: .03em;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-open { color: var(--accent2); font-size: 12px; font-weight: 500; letter-spacing: .05em; }
+
+    /* ── LAYOUT ── */
+    section { padding: 100px 0; }
+    .container { max-width: 780px; margin: 0 auto; padding: 0 32px; }
+
+    .section-tag {
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-family: var(--ff-head);
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 40px;
+      line-height: 1.2;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 60px;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      color: var(--accent2);
+      background: rgba(126,200,164,.08);
+      border: 1px solid rgba(126,200,164,.2);
+      padding: 4px 10px;
+      border-radius: 4px;
+      letter-spacing: .08em;
+      margin-bottom: 28px;
+    }
+    .hero-name {
+      font-family: var(--ff-head);
+      font-size: clamp(42px, 8vw, 72px);
+      font-weight: 400;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 40px;
+      line-height: 1.75;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 500; }
+    .hero-links { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 20px;
+      font-size: 13px; font-weight: 500;
+      border-radius: 6px;
+      transition: all .2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #1A0E06;
+    }
+    .btn-primary:hover { background: #d4946a; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+
+    /* ── STATS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 64px;
+    }
+    .stat {
+      background: var(--bg2);
+      padding: 24px;
+      text-align: center;
+    }
+    .stat-val {
+      font-family: var(--ff-head);
+      font-size: 28px;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .stat-label { font-size: 12px; color: var(--muted); }
+
+    /* ── ABOUT ── */
+    #about { border-top: 1px solid var(--border); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 240px;
+      gap: 60px;
+      align-items: start;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 16px; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-meta { display: flex; flex-direction: column; gap: 0; }
+    .meta-row {
+      display: flex; flex-direction: column;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-row:first-child { border-top: 1px solid var(--border); }
+    .meta-key { font-size: 11px; color: var(--muted); letter-spacing: .05em; margin-bottom: 3px; }
+    .meta-val { font-size: 13px; font-weight: 500; color: var(--text); }
+    .status-dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      background: var(--accent2);
+      border-radius: 50%;
+      margin-right: 6px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { border-top: 1px solid var(--border); }
+    .exp-item { margin-bottom: 48px; }
+    .exp-item:last-child { margin-bottom: 0; }
+    .exp-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 4px;
+    }
+    .exp-company { font-size: 17px; font-weight: 600; color: var(--text); }
+    .exp-date { font-family: var(--ff-mono); font-size: 12px; color: var(--muted); padding-top: 3px; }
+    .exp-role { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .exp-bullets li {
+      font-size: 14px;
+      color: var(--muted);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.65;
+    }
+    .exp-bullets li::before {
+      content: '•';
+      position: absolute; left: 0;
+      color: var(--accent);
+    }
+    .exp-bullets li strong { color: var(--text); font-weight: 500; }
+
+    /* ── SKILLS ── */
+    #skills { border-top: 1px solid var(--border); }
+    .skills-grid { display: flex; flex-direction: column; gap: 16px; }
+    .skill-row { display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: baseline; }
+    .skill-key { font-size: 13px; font-weight: 500; color: var(--text); }
+    .skill-val { font-size: 13px; color: var(--muted); }
+
+    /* ── PROJECTS ── */
+    #projects { border-top: 1px solid var(--border); }
+    .projects-grid { display: flex; flex-direction: column; gap: 24px; }
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px;
+      transition: border-color .2s;
+    }
+    .project-card:hover { border-color: var(--accent); }
+    .project-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .project-icon {
+      width: 36px; height: 36px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .project-link {
+      font-family: var(--ff-mono);
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 4px;
+      transition: all .2s;
+    }
+    .project-link:hover { color: var(--text); border-color: var(--muted); }
+    .project-name {
+      font-size: 16px; font-weight: 600;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .project-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      color: var(--muted);
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    #contact h2 { margin-bottom: 16px; }
+    #contact p { color: var(--muted); margin-bottom: 36px; max-width: 420px; margin-left: auto; margin-right: auto; }
+    .contact-links { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 32px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .nav-links { gap: 20px; }
+      .container { padding: 0 20px; }
+      section { padding: 72px 0; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .stats { grid-template-columns: 1fr; }
+      .skill-row { grid-template-columns: 1fr; gap: 4px; }
+      .exp-header { flex-direction: column; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Pranith.</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <span class="nav-open">● Open to opportunities</span>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-tag">Mobile Developer · Bengaluru, IN</div>
+    <h1 class="hero-name">Pranith<br>Varma S</h1>
+    <p class="hero-sub">
+      Building <strong>reliable, high-scale fintech apps</strong> in Flutter.<br>
+      Mobile Developer @ Freo — payments, lending, and the flows where getting it wrong has a real cost.
+    </p>
+    <div class="hero-links">
+      <a href="mailto:pranithvarmas@gmail.com" class="btn btn-primary">Say hello ↗</a>
+      <a href="https://github.com/pranithvarmas-web" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+      <a href="https://linkedin.com/in/pranith-varma" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+      <a href="https://leetcode.com/u/pranithvarmas" target="_blank" class="btn btn-ghost">LeetCode ↗</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-val">600K+</span>
+        <span class="stat-label">users onboarded</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">3.38M+</span>
+        <span class="stat-label">transactions processed</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">Rs.3.1B+</span>
+        <span class="stat-label">transaction value</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container fade-in">
+    <p class="section-tag">// About</p>
+    <h2>The short version</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a mobile developer who likes working on problems that actually matter — the payment flow that has to work every time, the onboarding that can't drop users, the architecture that will stay in the codebase for years.</p>
+        <p>For the past year I've worked on the mobile team at Freo, a fintech in the lending and payments space. I've worked across UPI, lending, and referrals & rewards — owning features end-to-end from the first BLoC event to Play Store deployment.</p>
+        <p>I work in Flutter and Dart, with BLoC and Clean Architecture. I care as much about how something is built as what is built.</p>
+      </div>
+      <div class="about-meta">
+        <div class="meta-row">
+          <span class="meta-key">ROLE</span>
+          <span class="meta-val">Mobile Developer</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">COMPANY</span>
+          <span class="meta-val">Freo</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">EXPERIENCE</span>
+          <span class="meta-val">1+ year</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">FOCUS</span>
+          <span class="meta-val">Fintech · Mobile</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">BASE</span>
+          <span class="meta-val">Bengaluru, IN</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">STATUS</span>
+          <span class="meta-val"><span class="status-dot"></span>Open</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container fade-in">
+    <p class="section-tag">// Experience</p>
+    <h2>Where I've shipped</h2>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <span class="exp-company">Freo</span>
+        <span class="exp-date">Aug 2024 — Present</span>
+      </div>
+      <div class="exp-role">Mobile Application Developer · Bengaluru, India</div>
+      <ul class="exp-bullets">
+        <li>Part of the core team that built and scaled the <strong>UPI platform</strong> at Freo, now serving <strong>600K+ users</strong> and processing <strong>3.38M+ transactions</strong> worth <strong>Rs.3.1B+</strong>.</li>
+        <li>Built the full <strong>UPI transaction flow</strong> covering P2P, P2M, self-transfer, mandates, and UPI Lite — handling millions of transactions reliably at scale.</li>
+        <li>Worked on the <strong>UPI vertical</strong> end-to-end, building mobile features that improved user engagement and transaction adoption across the platform.</li>
+        <li>Improved the <strong>UPI onboarding experience</strong>, reducing drop-offs and helping more users activate successfully.</li>
+        <li>Worked on the <strong>lending side</strong> — built repayment and foreclosure flows, and a cross-sell module at EMI checkout that bundles add-ons like insurance and credit-report renewals.</li>
+        <li>Built a <strong>referrals and rewards system</strong> that gives cashback to users on qualifying UPI transactions, driving higher transaction frequency on the platform.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <span class="exp-company">UIDAI</span>
+        <span class="exp-date">Feb 2024 — Jul 2024</span>
+      </div>
+      <div class="exp-role">Software Developer Intern · Bengaluru, India</div>
+      <ul class="exp-bullets">
+        <li>Integrated <strong>3 machine learning models</strong> into the Aadhaar verification process to detect fraud cases, <strong>reducing manual review effort by 8%</strong>.</li>
+        <li>Optimized database performance by implementing <strong>Redis caching</strong>, <strong>reducing query latency by 4%</strong> and improving overall response time.</li>
+        <li>Contributed in a team of three to develop a <strong>microservices-based architecture</strong> for the Resident Aadhaar Enrollment system.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container fade-in">
+    <p class="section-tag">// Skills</p>
+    <h2>The stack</h2>
+    <div class="skills-grid">
+      <div class="skill-row">
+        <span class="skill-key">Languages</span>
+        <span class="skill-val">Dart, Java, Kotlin</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-key">Mobile</span>
+        <span class="skill-val">Flutter, Android Development, Jetpack Compose</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-key">Architecture</span>
+        <span class="skill-val">BLoC, Clean Architecture, MVVM, GetIt</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-key">Backend & Storage</span>
+        <span class="skill-val">Supabase, Firebase, Hive, Redis, MySQL</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-key">API & Auth</span>
+        <span class="skill-val">RESTful APIs, JSON, Token-based Authentication</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-key">Tools</span>
+        <span class="skill-val">Git, GitHub, JIRA, Android Studio, VS Code, CI/CD</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container fade-in">
+    <p class="section-tag">// Projects</p>
+    <h2>Things I've built</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-icon">💰</div>
+          <a href="https://github.com/pranithvarmas-web/vault" target="_blank" class="project-link">Code ↗</a>
+        </div>
+        <div class="project-name">Vault — AI Personal CFO App</div>
+        <div class="project-desc">An AI-powered personal finance app for India's salaried middle class. Delivers a personalised Vault Score from income, savings, EMI, and debt inputs. Built with Clean Architecture, BLoC, GoRouter, and Supabase Edge Functions proxying Claude AI — without exposing API keys client-side.</div>
+        <div class="project-tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">Dart</span>
+          <span class="tag">BLoC</span>
+          <span class="tag">Clean Architecture</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">Hive</span>
+          <span class="tag">GoRouter</span>
+          <span class="tag">Claude AI</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-icon">🎬</div>
+          <a href="https://github.com/pranithvarmas-web/movies-db" target="_blank" class="project-link">Code ↗</a>
+        </div>
+        <div class="project-name">Movies Explorer</div>
+        <div class="project-desc">A movie discovery app consuming a live REST API via the HTTP package. Built with Flutter and BLoC for state management. Integrated Hive for local caching and CachedNetworkImage for smooth loading, with real-time search and Hero animations.</div>
+        <div class="project-tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">Dart</span>
+          <span class="tag">BLoC</span>
+          <span class="tag">Hive</span>
+          <span class="tag">REST API</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container fade-in">
+    <p class="section-tag">// Contact</p>
+    <h2>Let's build something reliable.</h2>
+    <p>Open to Mobile Developer and Flutter roles in fintech, consumer apps, or high-growth startups. The inbox is always open.</p>
+    <div class="contact-links">
+      <a href="mailto:pranithvarmas@gmail.com" class="btn btn-primary">Say hello ↗</a>
+      <a href="https://linkedin.com/in/pranith-varma" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+      <a href="https://github.com/pranithvarmas-web" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+      <a href="https://leetcode.com/u/pranithvarmas" target="_blank" class="btn btn-ghost">LeetCode ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Designed & built by Pranith Varma S · © 2025
+</footer>
+
+<script>
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current
+        ? 'var(--text)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
